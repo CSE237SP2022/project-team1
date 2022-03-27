@@ -8,10 +8,10 @@ public class Food {
 	private double fat;
 	private double protein;
 	
-	public Food(String name, double caloriess, double carbs,
+	public Food(String name, double calories, double carbs,
 			double fat, double protein) {
 		this.name = name;
-		this.calories = caloriess;
+		this.calories = calories;
 		this.carbs = carbs;
 		this.fat = fat;
 		this.protein = protein;
@@ -44,6 +44,11 @@ public class Food {
 	
 	public double getProtein() {
 		return this.protein;
+	}
+	
+	public String toString() {
+		
+		return name + "\nCalories: " + calories;
 	}
 
 }
