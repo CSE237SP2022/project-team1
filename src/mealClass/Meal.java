@@ -19,6 +19,10 @@ public class Meal {
 		mealItems.add(food);
 	}
 	
+	public void setName(String newName) {
+		name = newName;
+	}
+	
 	public int totalCalories() {
 		
 		int totalCaloriesInMeal = 0;
