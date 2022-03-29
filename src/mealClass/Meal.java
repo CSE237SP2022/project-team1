@@ -61,4 +61,12 @@ public class Meal {
 		return totalFatInMeal;
 	
 	}
+	
+//	public double totalProtein() {
+//		double totalProteinInMeal = 0;
+//		for (Food f : mealItems) {
+//			totalProteinInMeal += f.getProtein();
+//		}
+//		return totalProteinInMeal;
+//	}
 }
