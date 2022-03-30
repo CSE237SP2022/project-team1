@@ -28,7 +28,7 @@ public class Prompt {
 
 				case "1":
 
-					createFood(storedFood, statsTracker);
+					createFood(storedFood, statsTracker, reader);
 
 					break;
 
@@ -72,7 +72,7 @@ public class Prompt {
 
 						System.out.println("Enter a food to add to a meal.");
 
-						createFood(storedFood, statsTracker);
+						createFood(storedFood, statsTracker, reader);
 						trackedMeal.addFood(storedFood.get(storedFood.size() - 1));
 
 						System.out.println("Would you like to enter another food? Y/N");
@@ -96,9 +96,8 @@ public class Prompt {
 
 	}
 
-	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker) {
+	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
 
-		try (Scanner reader = new Scanner(System.in)) {
 			dayStatistics newStats = new dayStatistics();
 			System.out.println("Enter the name of the food: ");
 			String foodName = reader.nextLine();
@@ -122,7 +121,9 @@ public class Prompt {
 			statsTracker.add(totalCals);
 
 			System.out.println("Food entered.");
-		}
+			
+			// empty reader to flush remaining new line
+			reader.nextLine();
 
 	}
 
