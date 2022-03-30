@@ -19,6 +19,10 @@ public class Meal {
 		mealItems.add(food);
 	}
 	
+	public void setName(String newName) {
+		name = newName;
+	}
+	
 	public int totalCalories() {
 		
 		int totalCaloriesInMeal = 0;
@@ -57,4 +61,12 @@ public class Meal {
 		return totalFatInMeal;
 	
 	}
+	
+//	public double totalProtein() {
+//		double totalProteinInMeal = 0;
+//		for (Food f : mealItems) {
+//			totalProteinInMeal += f.getProtein();
+//		}
+//		return totalProteinInMeal;
+//	}
 }

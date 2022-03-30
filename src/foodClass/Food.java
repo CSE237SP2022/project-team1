@@ -48,7 +48,7 @@ public class Food {
 	
 	public String toString() {
 		
-		return name + "\nCalories: " + calories;
+		return name + "\nCalories: " + calories + "\nCarbs: " + carbs + "\nFat: " + fat + "\nProtein: " + protein;
 	}
 
 }
