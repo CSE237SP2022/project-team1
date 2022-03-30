@@ -9,7 +9,7 @@ import foodClass.Food;
 import mealClass.Meal;
 
 public class Prompt {	
-	public static void run() {
+	public void run() {
 	
 	Scanner reader = new Scanner(System.in);
 	String optionMenuSelection = "";
