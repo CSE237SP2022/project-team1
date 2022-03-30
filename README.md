@@ -25,5 +25,5 @@ Run Instructions
   1. In a terminal window, clone the repository using the git clone command
   2. Enter the command 'cd src'
   3. Enter the command 'cd counterClass'
-  4. Enter the command 'javac Counter.java' to compile the program
-  5. If there are no errors, enter the command 'java Counter' to run the program and view results
+  4. Enter the command 'javac -classpath .. Counter.java' to compile the program
+  5. Enter the command 'java -classpath .. counterClass.Counter' to run the program and view results!
