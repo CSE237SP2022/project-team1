@@ -50,7 +50,7 @@ public class Food {
 		return name + "\nCalories: " + calories + "\nCarbs: " + carbs + "\nFat: " + fat + "\nProtein: " + protein;
 	}
 
-public String[] toArrayOfStats() {
+	public String[] toArrayOfStats() {
 		String[] arr = new String[5];
 		
 		arr[0] = this.getName();
