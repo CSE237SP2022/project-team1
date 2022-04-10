@@ -20,7 +20,7 @@ public class Prompt {
 
 	}
 
-	private void viewOptionMenu(String optionMenuSelection, ArrayList<Food> storedFood, List<Double> statsTracker) {
+	public void viewOptionMenu(String optionMenuSelection, ArrayList<Food> storedFood, List<Double> statsTracker) {
 		try (Scanner reader = new Scanner(System.in)) {
 			while (!optionMenuSelection.equalsIgnoreCase("quit") && !optionMenuSelection.equals("4")) {
 
@@ -34,7 +34,7 @@ public class Prompt {
 		System.out.println("Tracker ended.");
 	}
 
-	private String chooseFromOptions(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
+	public String chooseFromOptions(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
 		String optionMenuSelection;
 		String optionMenuSelection2;
 		optionMenuSelection = reader.nextLine();
@@ -64,7 +64,7 @@ public class Prompt {
 		return optionMenuSelection;
 	}
 
-	private void statisticsView(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
+	public void statisticsView(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
 		String optionMenuSelection2;
 		System.out.println(
 				"\n1. Enter the name of the food to view nutrition statistics\n2. Check total calories");
@@ -85,7 +85,7 @@ public class Prompt {
 		}
 	}
 
-	private void createMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
+	public static void createMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
 		boolean doneEnteringFood = false;
 
 		Meal trackedMeal = new Meal();
@@ -100,7 +100,7 @@ public class Prompt {
 		System.out.println("Meal complete");
 	}
 
-	private void enterFoodForMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader,
+	public static void enterFoodForMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader,
 			boolean doneEnteringFood, Meal trackedMeal) {
 		while (doneEnteringFood != true) {
 
@@ -120,7 +120,7 @@ public class Prompt {
 		}
 	}
 
-	private void checkFoodStats(ArrayList<Food> storedFood, Scanner reader) {
+	public static void checkFoodStats(ArrayList<Food> storedFood, Scanner reader) {
 		System.out.println("Enter the food name now: ");
 		String foodToView = reader.nextLine();
 
