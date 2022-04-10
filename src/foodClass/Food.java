@@ -8,10 +8,10 @@ public class Food {
 	private double fat;
 	private double protein;
 	
-	public Food(String name, double caloriess, double carbs,
+	public Food(String name, double calories, double carbs,
 			double fat, double protein) {
 		this.name = name;
-		this.calories = caloriess;
+		this.calories = calories;
 		this.carbs = carbs;
 		this.fat = fat;
 		this.protein = protein;
@@ -48,12 +48,10 @@ public class Food {
 	
 	public String toString() {
 		String foodToString = this.getName() + " has: " + this.getCalories() + " calories, " + 
-				this.getCarbs() + "grams carbs, " + this.getFat() + "grams fat, " +
-				this.getProtein() + "grams protein.";
-		return foodToString;
+		return name + "\nCalories: " + calories + "\nCarbs: " + carbs + "\nFat: " + fat + "\nProtein: " + protein;
 	}
-	
-	public String[] toArrayOfStats() {
+
+public String[] toArrayOfStats() {
 		String[] arr = new String[5];
 		
 		arr[0] = this.getName();
@@ -63,6 +61,5 @@ public class Food {
 		arr[4] = String.valueOf(this.getProtein());
 		
 		return arr;
-	}
 
 }
