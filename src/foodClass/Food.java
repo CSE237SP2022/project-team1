@@ -45,5 +45,21 @@ public class Food {
 	public double getProtein() {
 		return this.protein;
 	}
+	
+	public String toString() {
+		String foodToString = this.getName() + " has: " + this.getCalories() + " calories, " + 
+				this.getCarbs() + "grams carbs, " + this.getFat() + "grams fat, " +
+				this.getProtein() + "grams protein.";
+		return foodToString;
+	}
+	
+	public double[] toArrayOfStats() {
+		double[] arr = new double[4];
+		arr[0] = this.getCalories();
+		arr[1] = this.getCarbs();
+		arr[2] = this.getFat();
+		arr[3] = this.getProtein();
+		return arr;
+	}
 
 }
