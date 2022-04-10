@@ -47,7 +47,6 @@ public class Food {
 	}
 	
 	public String toString() {
-		String foodToString = this.getName() + " has: " + this.getCalories() + " calories, " + 
 		return name + "\nCalories: " + calories + "\nCarbs: " + carbs + "\nFat: " + fat + "\nProtein: " + protein;
 	}
 
