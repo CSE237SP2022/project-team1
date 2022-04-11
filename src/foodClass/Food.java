@@ -47,10 +47,9 @@ public class Food {
 	}
 	
 	public String toString() {
-		
 		return name + "\nCalories: " + calories + "\nCarbs: " + carbs + "\nFat: " + fat + "\nProtein: " + protein;
 	}
-
+	
 	public String[] toArrayOfStats() {
 		String[] arr = new String[5];
 		
@@ -61,5 +60,7 @@ public class Food {
 		arr[4] = String.valueOf(this.getProtein());
 		
 		return arr;
+
+
 	}
 }
