@@ -32,7 +32,7 @@ public class FoodCSVTests {
 	
 	@Test
 	void testGenCSV() {
-		String fileName = "foodCSV";
+		String fileName = "database.csv";
 		
 		FoodCSV data = new FoodCSV();
 		
