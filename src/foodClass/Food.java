@@ -47,7 +47,6 @@ public class Food {
 	}
 	
 	public String toString() {
-		
 		return name + "\nCalories: " + calories + "\nCarbs: " + carbs + "\nFat: " + fat + "\nProtein: " + protein;
 	}
 	
@@ -62,6 +61,5 @@ public class Food {
 		
 		return arr;
 
-}
-
+	}
 }
