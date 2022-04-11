@@ -91,7 +91,6 @@ public class Prompt {
 		String mealName = reader.nextLine();
 
 		trackedMeal.setName(mealName);
-
 		enterFoodForMeal(storedFood, statsTracker, reader, doneEnteringFood, trackedMeal);
 
 		System.out.println("Meal complete");
