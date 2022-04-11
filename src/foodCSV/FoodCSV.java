@@ -18,16 +18,9 @@ public class FoodCSV {
 		this.foodCount = 0;
 	}
 	
-	public int getFoodCount() {
-		return foodCount;
-	}
-
-	
 	
 	public void generateFoodCSV(String fileName) {
 		 
-	     //FileWriter writer = null;
-
 		 try {
 		     FileWriter writer = new FileWriter(fileName);
 		     writer.append("Food");
@@ -44,9 +37,7 @@ public class FoodCSV {
 		     
 		     writer.flush();
 	         writer.close();
-	
-		     //System.out.println("CSV file is created... " + getCurDirectory());
-	
+		
 		  } 
 		 catch (IOException e) {
 		     e.printStackTrace();
@@ -68,10 +59,8 @@ public class FoodCSV {
 	
 	public static void writeToFile(File file, Food food) {
 		String[] foodStats = food.toArrayOfStats();
-		//FileWriter writer = null;
 		
 		 try {
-	
 			 FileWriter writer = new FileWriter(file, true);
 		     		     
 		     writer.append(foodStats[0]);
@@ -131,10 +120,13 @@ public class FoodCSV {
 		}
 	}
 
+	
+	public int getFoodCount() {
+		return foodCount;
+	}
 	public String[][] getDataArr() {
 		return dataArr;
 	}
-
 	public void setDataArr(String[][] dataArr) {
 		this.dataArr = dataArr;
 	}
