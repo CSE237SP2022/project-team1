@@ -31,7 +31,6 @@ public class Prompt {
 						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Quit ");
 
 				optionMenuSelection = chooseFromOptions(storedFood, statsTracker, reader);
-
 			}
 		}
 		System.out.println("Tracker ended.");
@@ -47,22 +46,17 @@ public class Prompt {
 		case "1":
 
 			createFood(storedFood, statsTracker, reader);
-
 			break;
 
 		case "2":
 			
-			statisticsView(storedFood, statsTracker, reader);
-		 
+			statisticsView(storedFood, statsTracker, reader);		 
 			break;
 
-			
 		case "3":
 
-			createMeal(storedFood, statsTracker, reader);
-			
+			createMeal(storedFood, statsTracker, reader);			
 			break;
-
 		}
 		return optionMenuSelection;
 	}
@@ -119,7 +113,6 @@ public class Prompt {
 			if (anotherFood.equalsIgnoreCase("N") || anotherFood.equalsIgnoreCase("no")) {
 				doneEnteringFood = true;
 			}
-
 		}
 	}
 
@@ -134,7 +127,6 @@ public class Prompt {
 			}
 		}
 	}
-//	static int i = 0;
 	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
 
 			ArrayList<String> foodData = new ArrayList<>();
@@ -163,15 +155,6 @@ public class Prompt {
 			newStats.totalProtein(proteinInFood);
 			String protein = Double.toString(fatInFood);
 			foodData.add("protein: " + protein);
-//			i+=4;
-			
-//		for (int i=0; i<foodData.length; i++) {
-//			foodData[i] = foodName;
-//			foodData[i+1] = ("calories: " + cals);
-//			foodData[i+2] = ("carbs: " + carbs);
-//			foodData[i+3] = ("fat: " + fat);
-//			foodData[i+4] = ("protein: " + protein);
-//		}
 
 			writeToFile(foodData);
 			Food foodTracked = new Food(foodName, caloriesInFood, carbsInFood, fatInFood, proteinInFood);
@@ -183,8 +166,6 @@ public class Prompt {
 
 		// empty reader to flush remaining new line
 			reader.nextLine();
-
-
 	}
 
 	public static double sum(List<Double> list) {
@@ -198,10 +179,7 @@ public class Prompt {
 	public static void writeToFile(ArrayList<String> foodStats) {
 		try {
 			FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics.csv", true);
-//			int length = foodStats.size();
-//			for (int i=0; i<length; i++) {
 			dayFoodStats.append(foodStats + "\n");
-//			}
 			dayFoodStats.close();
 		}
 		catch (IOException e) {
