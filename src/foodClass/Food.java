@@ -60,5 +60,6 @@ public class Food {
 		arr[4] = String.valueOf(this.getProtein());
 		
 		return arr;
+
 	}
 }
