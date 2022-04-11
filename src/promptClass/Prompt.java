@@ -1,6 +1,7 @@
 package promptClass;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,13 +9,9 @@ import dayStatistics.dayStatistics;
 import foodClass.Food;
 import mealClass.Meal;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.io.IOException;
-import java.nio.file.StandardOpenOption;
-import java.io.*;
+
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Prompt {
 	public void run() {
@@ -36,7 +33,6 @@ public class Prompt {
 						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Quit ");
 
 				optionMenuSelection = chooseFromOptions(storedFood, statsTracker, reader);
-
 			}
 		}
 		System.out.println("Tracker ended.");
@@ -52,7 +48,6 @@ public class Prompt {
 		case "1":
 
 			createFood(storedFood, statsTracker, reader);
-
 			break;
 
 		case "2":
@@ -66,7 +61,6 @@ public class Prompt {
 			createMeal(storedFood, statsTracker, reader);
 
 			break;
-
 		}
 		return optionMenuSelection;
 	}
@@ -100,7 +94,6 @@ public class Prompt {
 		String mealName = reader.nextLine();
 
 		trackedMeal.setName(mealName);
-
 		enterFoodForMeal(storedFood, statsTracker, reader, doneEnteringFood, trackedMeal);
 
 		System.out.println("Meal complete");
@@ -123,7 +116,6 @@ public class Prompt {
 			if (anotherFood.equalsIgnoreCase("N") || anotherFood.equalsIgnoreCase("no")) {
 				doneEnteringFood = true;
 			}
-
 		}
 
 	}
@@ -139,35 +131,74 @@ public class Prompt {
 			}
 		}
 	}
-
 	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
-		dayStatistics newStats = new dayStatistics();
-		System.out.println("Enter the name of the food: ");
-		String foodName = reader.nextLine();
-		newStats.setName(foodName);
-		System.out.println("Enter the number of calories: ");
-		double caloriesInFood = reader.nextDouble();
-		double totalCals = newStats.totalCalories(caloriesInFood);
-		System.out.println("Enter the number of carbs: ");
-		double carbsInFood = reader.nextDouble();
-		newStats.totalCarbs(carbsInFood);
-		System.out.println("Enter the amount of fat: ");
-		double fatInFood = reader.nextDouble();
-		newStats.totalFat(fatInFood);
-		System.out.println("Finally, enter the amount of protein: ");
-		double proteinInFood = reader.nextDouble();
-		newStats.totalProtein(proteinInFood);
 
-		writeToFile(foodName, caloriesInFood, carbsInFood, fatInFood, proteinInFood);
-		Food foodTracked = new Food(foodName, caloriesInFood, carbsInFood, fatInFood, proteinInFood);
-		storedFood.add(foodTracked);
+			ArrayList<String> foodData = new ArrayList<>();
+			dayStatistics newStats = new dayStatistics();
+			System.out.println("Enter the name of the food: ");
+			String foodName = reader.nextLine();
+			newStats.setName(foodName);
+			foodData.add(foodName);
+			try {
+				System.out.println("Enter the number of calories: ");
+				if (! reader.hasNextDouble()) {
+					System.err.println("Invalid input, please enter again");
+					reader.nextLine();
+				}
+				double caloriesInFood = reader.nextDouble();
+				double totalCals = newStats.totalCalories(caloriesInFood);
+				String cals = Double.toString(caloriesInFood);
+				foodData.add("calories: " + cals);
+				reader.nextLine();
 
-		statsTracker.add(totalCals);
+				System.out.println("Enter the number of carbs: ");
+				if (! reader.hasNextDouble()) {
+					System.err.println("Invalid input, please enter again");
+					reader.nextLine();
+				}
+				double carbsInFood = reader.nextDouble();
+				newStats.totalCarbs(carbsInFood);
+				String carbs = Double.toString(carbsInFood);
+				foodData.add("carbs: " + carbs);
+				reader.nextLine();
+				
+				System.out.println("Enter the amount of fat: ");
+				if (! reader.hasNextDouble()) {
+					System.err.println("Invalid input, please enter again");
+					reader.nextLine();
+				}
+				double fatInFood = reader.nextDouble();
+				newStats.totalFat(fatInFood);
+				String fat = Double.toString(fatInFood);
+				foodData.add("fat: " + fat);
+				reader.nextLine();
+				
+				System.out.println("Finally, enter the amount of protein: ");
+				if (! reader.hasNextDouble()) {
+					System.err.println("Invalid input, please enter again");
+					reader.nextLine();
+				}
+				double proteinInFood = reader.nextDouble();
+				newStats.totalProtein(proteinInFood);
+				String protein = Double.toString(fatInFood);
+				foodData.add("protein: " + protein);
 
-		System.out.println("Food entered.");
+				writeToFile(foodData);
+				Food foodTracked = new Food(foodName, caloriesInFood, carbsInFood, fatInFood, proteinInFood);
+				storedFood.add(foodTracked);
 
-		// empty reader to flush remaining new line
-		reader.nextLine();
+				statsTracker.add(totalCals);
+
+				System.out.println("Food entered.");
+
+
+			}
+			catch (InputMismatchException ex) {
+				System.err.println("Invalid input1, please enter again");
+		        reader.nextLine();
+			}
+			// empty reader to flush remaining new line
+			reader.nextLine();
 	}
 
 	public static double sum(List<Double> list) {
@@ -178,17 +209,11 @@ public class Prompt {
 		return sum;
 	}
 	
-	public static void writeToFile (String foodName, double calories, double carbs, double fat, double protein) {
-		try {
-			FileWriter myWriter = new FileWriter("dailyFoodData.csv");
-			int cals = (int)calories;
-			int carbs1 = (int)carbs;
-			int fat1 = (int)fat;
-			int protein1 = (int)protein;
-			myWriter.write(foodName, cals, carbs1);
-			myWriter.close();
+	public static void writeToFile(ArrayList<String> foodStats) {
+		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics.csv", true)) {
+			dayFoodStats.append(foodStats + "\n");
 		}
-		catch(IOException e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
