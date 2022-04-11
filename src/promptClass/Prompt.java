@@ -8,6 +8,9 @@ import dayStatistics.dayStatistics;
 import foodClass.Food;
 import mealClass.Meal;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Prompt {
 	public void run() {
 
@@ -131,35 +134,56 @@ public class Prompt {
 			}
 		}
 	}
-
+//	static int i = 0;
 	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
 
+			ArrayList<String> foodData = new ArrayList<>();
 			dayStatistics newStats = new dayStatistics();
 			System.out.println("Enter the name of the food: ");
 			String foodName = reader.nextLine();
 			newStats.setName(foodName);
+			foodData.add(foodName);
 			System.out.println("Enter the number of calories: ");
 			double caloriesInFood = reader.nextDouble();
 			double totalCals = newStats.totalCalories(caloriesInFood);
+			String cals = Double.toString(caloriesInFood);
+			foodData.add("calories: " + cals);
 			System.out.println("Enter the number of carbs: ");
 			double carbsInFood = reader.nextDouble();
 			newStats.totalCarbs(carbsInFood);
+			String carbs = Double.toString(carbsInFood);
+			foodData.add("carbs: " + carbs);
 			System.out.println("Enter the amount of fat: ");
 			double fatInFood = reader.nextDouble();
 			newStats.totalFat(fatInFood);
+			String fat = Double.toString(fatInFood);
+			foodData.add("fat: " + fat);
 			System.out.println("Finally, enter the amount of protein: ");
 			double proteinInFood = reader.nextDouble();
 			newStats.totalProtein(proteinInFood);
+			String protein = Double.toString(fatInFood);
+			foodData.add("protein: " + protein);
+//			i+=4;
+			
+//		for (int i=0; i<foodData.length; i++) {
+//			foodData[i] = foodName;
+//			foodData[i+1] = ("calories: " + cals);
+//			foodData[i+2] = ("carbs: " + carbs);
+//			foodData[i+3] = ("fat: " + fat);
+//			foodData[i+4] = ("protein: " + protein);
+//		}
 
+			writeToFile(foodData);
 			Food foodTracked = new Food(foodName, caloriesInFood, carbsInFood, fatInFood, proteinInFood);
 			storedFood.add(foodTracked);
 
 			statsTracker.add(totalCals);
 
 			System.out.println("Food entered.");
-			
-			// empty reader to flush remaining new line
+
+		// empty reader to flush remaining new line
 			reader.nextLine();
+
 
 	}
 
@@ -171,12 +195,18 @@ public class Prompt {
 		return sum;
 	}
 	
-	
-	
-
-//public static void foodStats() {
-//	stats.setName(foodName);
-//	
-//	}
+	public static void writeToFile(ArrayList<String> foodStats) {
+		try {
+			FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics.csv", true);
+//			int length = foodStats.size();
+//			for (int i=0; i<length; i++) {
+			dayFoodStats.append(foodStats + "\n");
+//			}
+			dayFoodStats.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
