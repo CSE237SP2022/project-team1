@@ -15,44 +15,80 @@ public class FoodCSVTests {
 	private Food egg;
 	private Food apple;
 	
+	private String[][] dataArr;
+	private String[] appleArray;
+	private String[] eggArray;
+	
+	private FoodCSV data;
+	
+	private String fileName;
+	String curDir;
+	File csv1;
+	
 	@BeforeEach
 	void setup() {
 		egg = new Food("egg", 78, .6, 5, 6);
 		apple = new Food("apple", 95);
-				
-//		FoodCSV foodCSV = new FoodCSV();
-//		foodCSV.generateFoodCSV("FoodCSV");
-//		
-//		String curDir = System.getProperty("user.dir");
-//		File csv1 = new File(curDir + "/FoodCSV");
-//		
-//		foodCSV.addFood(foodCSV.getFileWriter(), "FoodCSV", apple);
+		
+		data = new FoodCSV();
+		
+		fileName = "TESTdatabase.csv";
+		data.generateFoodCSV(fileName);
+		
+		data.addFood(apple);
+		
+		data.addFood(egg);
+		
+		curDir = System.getProperty("user.dir");
+		csv1 = new File(curDir + "/" + fileName);
+		dataArr = data.csvTo2dArray(csv1);
+		
+		appleArray = apple.toArrayOfStats();
+		eggArray = egg.toArrayOfStats();
+		
 	}
 	
 	
 	@Test
 	void testGenCSV() {
-		String fileName = "database.csv";
-		
-		FoodCSV data = new FoodCSV();
-		
-		data.generateFoodCSV(fileName);
-		data.addFood(data.getFileWriter(), fileName, apple);
-		data.addFood(data.getFileWriter(), fileName, egg);
-		
-		String curDir = System.getProperty("user.dir");
-		File csv1 = new File(curDir + "/" + fileName);
-				
-		String[][] dataArr = data.csvTo2dArray(csv1);
-		
-		String[] appleArray = apple.toArrayOfStats();
-		
-		data.print2dArray(dataArr);
-		//System.out.println(dataArr[1][1]);
-		//System.out.println(appleArray[1]);
-		
 		assertTrue(dataArr[1][1].equals(appleArray[1]));
 	}
 	
+	@Test
+	void testFoodCountInitial() {
+		assertEquals(data.getFoodCount(), 2);
+	}
+	@Test
+	void testFoodCountIncrement() {
+		Food pizza = new Food("pizza", 285, 36, 10, 12);
+		Food bagel = new Food("bagel", 250, 100, 14.7, 1);
+		
+		
+		data.addFood(pizza);
+		data.addFood(bagel);
+		
+		assertEquals(4, data.getFoodCount());
+	}
+	
+	@Test
+	void testAddFood1() {
+		Food pizza = new Food("pizza", 285, 36, 10, 12);
+		Food bagel = new Food("bagel", 250, 100, 14.7, 1);
+		
+		data.addFood(pizza);
+		data.addFood(bagel);
+		
+		assertEquals(data.getDataArr()[3][2], String.valueOf(pizza.toArrayOfStats()[2]));
+	}
+	
+	@Test
+	void testAddFood2() {
+		Food tomato = new Food("tomato", 40, 20, 10, 25);		
+		
+		data.addFood(tomato);
+						
+		assertEquals(data.getDataArr()[3][2], String.valueOf(tomato.toArrayOfStats()[2]));
+	}
+
 
 }

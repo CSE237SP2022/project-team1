@@ -11,7 +11,8 @@ import foodClass.Food;
 public class FoodCSV {
 	
 	private int foodCount;
-	private FileWriter writer = null;
+	private String[][] dataArr;
+	File dataCSV;
 	
 	public FoodCSV() {
 		this.foodCount = 0;
@@ -20,9 +21,7 @@ public class FoodCSV {
 	public int getFoodCount() {
 		return foodCount;
 	}
-	public FileWriter getFileWriter() {
-		return writer;
-	}
+
 	
 	
 	public void generateFoodCSV(String fileName) {
@@ -30,7 +29,7 @@ public class FoodCSV {
 	     //FileWriter writer = null;
 
 		 try {
-		     writer = new FileWriter(fileName);
+		     FileWriter writer = new FileWriter(fileName);
 		     writer.append("Food");
 		     writer.append(',');
 		     writer.append("Calories");
@@ -42,6 +41,9 @@ public class FoodCSV {
 		     writer.append("Protein");
 		     writer.append(',');
 		     writer.append('\n');
+		     
+		     writer.flush();
+	         writer.close();
 	
 		     //System.out.println("CSV file is created... " + getCurDirectory());
 	
@@ -49,24 +51,29 @@ public class FoodCSV {
 		 catch (IOException e) {
 		     e.printStackTrace();
 		  } 
-		  finally {
-		        try {
-		        	writer.flush();
-		        	writer.close();
-		        } 
-		        catch (IOException e) {
-		        	e.printStackTrace();
-		        }
-		 }
+		 
+		String curDir = System.getProperty("user.dir");
+		dataCSV = new File(curDir + "/" + fileName);
+		  
 	}
 	
-	public void addFood(FileWriter writer, String fileName, Food food) {
+	public void addFood(Food food) {
 		
+		writeToFile(dataCSV, food);
+	    foodCount++;
+	    setDataArr(csvTo2dArray(dataCSV));
+	
+		  
+	}
+	
+	public static void writeToFile(File file, Food food) {
 		String[] foodStats = food.toArrayOfStats();
+		//FileWriter writer = null;
 		
 		 try {
 	
-		     writer = new FileWriter(fileName, true);
+			 FileWriter writer = new FileWriter(file, true);
+		     		     
 		     writer.append(foodStats[0]);
 		     writer.append(',');
 		     writer.append(foodStats[1]);
@@ -79,21 +86,14 @@ public class FoodCSV {
 		     writer.append(',');
 		     writer.append('\n');
 	
-		     //System.out.println("CSV file is created... " + getCurDirectory());
-		     foodCount++;
+		     writer.flush();
+	         writer.close();
 	
 		  } catch (IOException e) {
 		     e.printStackTrace();
 		  } 
-		  finally {
-		        try {
-		        	writer.flush();
-		        	writer.close();
-		        } 
-		        catch (IOException e) {
-		        	e.printStackTrace();
-		        }
-		 }
+		 
+		 
 	}
 	
 	public String[][] csvTo2dArray(File file){
@@ -129,6 +129,14 @@ public class FoodCSV {
 			}
 			//System.out.println();
 		}
+	}
+
+	public String[][] getDataArr() {
+		return dataArr;
+	}
+
+	public void setDataArr(String[][] dataArr) {
+		this.dataArr = dataArr;
 	}
 
 }
