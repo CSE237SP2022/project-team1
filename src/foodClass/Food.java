@@ -61,17 +61,5 @@ public class Food {
 		
 		return arr;
 
-}
-
-	public String[] toArrayOfStats() {
-		String[] arr = new String[5];
-		
-		arr[0] = this.getName();
-		arr[1] = String.valueOf(this.getCalories());
-		arr[2] = String.valueOf(this.getCarbs());
-		arr[3] = String.valueOf(this.getFat());
-		arr[4] = String.valueOf(this.getProtein());
-		
-		return arr;
-
+	}
 }
