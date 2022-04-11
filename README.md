@@ -9,6 +9,8 @@ User Stories
 - Users who wish to view total stats for a particular day can see their cumulative calories,
   carbs, fat, and protein for a session
   
+- Users can view a .csv file of every food item they have entered in a given session in the file called 'database.csv'.  
+  
 Current Issues
 - Counter currently tracks total cumulative calories, but does not reset yet (like reset after a day)
 - Counter also does not save the total cumulative calorie data session to session, so it only tracks total statistics per session
