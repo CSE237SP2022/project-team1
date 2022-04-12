@@ -22,7 +22,7 @@ Future Implementations
 - Store information in a file so that a user can access it later as opposed to losing
   statistics after ending the program
 - Store food information based on the current day
-- add a ton of common foods to database.csv
+- add a ton of common foods to database.csv and make it a file that comes in the repo so all calorie tracker users have access to the large database
   
 Run Instructions
   1. In a terminal window, clone the repository using the git clone command
