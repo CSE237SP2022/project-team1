@@ -13,7 +13,7 @@ User Stories
   
 Current Issues
 - Counter currently tracks total cumulative calories, but does not reset yet (like reset after a day)
-- Counter saves total cumulative food data in a 'dailyFoodStatistics.csv' file (which you can search up after you enter food data into the counter), but does not internally save the total cumulative calorie data session to session yet, so it only tracks total statistics per session
+- Counter saves total cumulative food data in a 'dailyFoodStatistics.csv' file (which you can search up after you enter food data into the counter), but counter does not internally save the total cumulative calorie data session to session yet, so it only tracks total statistics per session
 - Temporarily fixed error messages that come up when you enter say a word instead of a number for the food data prompts, but need to do a better fix with a helper method
 - database.csv is overwritten every time a user ends and then starts a new session. 
  
