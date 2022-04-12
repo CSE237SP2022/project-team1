@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import dayStatistics.dayStatistics;
+import foodCSV.FoodCSV;
 import foodClass.Food;
 import mealClass.Meal;
 
@@ -14,12 +15,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Prompt {
+	FoodCSV database;
+	
 	public void run() {
 
 		String optionMenuSelection = "";
 		String optionMenuSelection2 = "";
 		ArrayList<Food> storedFood = new ArrayList<>();
 		List<Double> statsTracker = new ArrayList<>();
+		
 
 		viewOptionMenu(optionMenuSelection, storedFood, statsTracker);
 
@@ -47,7 +51,7 @@ public class Prompt {
 
 		case "1":
 
-			createFood(storedFood, statsTracker, reader);
+			createFood(storedFood, statsTracker, reader, database);
 			break;
 
 		case "2":
@@ -106,7 +110,7 @@ public class Prompt {
 
 			System.out.println("Enter a food to add to a meal.");
 
-			createFood(storedFood, statsTracker, reader);
+			createFood(storedFood, statsTracker, reader, database);
 			trackedMeal.addFood(storedFood.get(storedFood.size() - 1));
 
 			System.out.println("Would you like to enter another food? Y/N");
@@ -131,7 +135,7 @@ public class Prompt {
 			}
 		}
 	}
-	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
+	public static void createFood(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader, FoodCSV database) {
 
 			ArrayList<String> foodData = new ArrayList<>();
 			dayStatistics newStats = new dayStatistics();
@@ -188,6 +192,8 @@ public class Prompt {
 				storedFood.add(foodTracked);
 
 				statsTracker.add(totalCals);
+				
+				database.addFood(foodTracked);
 
 				System.out.println("Food entered.");
 
