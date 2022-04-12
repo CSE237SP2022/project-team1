@@ -8,12 +8,12 @@ User Stories
 - Users who wish to have a working record of their food intake can track each food they eat
 - Users who wish to view total stats for a particular day can see their cumulative calories,
   carbs, fat, and protein for a session
-  
-- Users can view a .csv file of every food item they have entered in a given session in the file called 'database.csv'.  
+- Users can view a .csv file of every food item they have entered in a given session in the file called 'database.csv' (in the counterClass folder).  
   
 Current Issues
 - Counter currently tracks total cumulative calories, but does not reset yet (like reset after a day)
 - Counter also does not save the total cumulative calorie data session to session, so it only tracks total statistics per session
+- database.csv is overwritten every time a user ends and then starts a new session. 
  
 Future Implementations
 - Recognize when a food has already been entered and remember its statistics so the user
@@ -22,6 +22,7 @@ Future Implementations
 - Store information in a file so that a user can access it later as opposed to losing
   statistics after ending the program
 - Store food information based on the current day
+- add a ton of common foods to database.csv
   
 Run Instructions
   1. In a terminal window, clone the repository using the git clone command
