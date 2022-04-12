@@ -15,7 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Prompt {
-	FoodCSV database;
+	
 	
 	public void run() {
 
@@ -23,26 +23,29 @@ public class Prompt {
 		String optionMenuSelection2 = "";
 		ArrayList<Food> storedFood = new ArrayList<>();
 		List<Double> statsTracker = new ArrayList<>();
+		FoodCSV database = new FoodCSV();
+		String fileName = "database(1).csv";
+		database.generateFoodCSV(fileName);
 		
 
-		viewOptionMenu(optionMenuSelection, storedFood, statsTracker);
+		viewOptionMenu(optionMenuSelection, storedFood, statsTracker, database);
 
 	}
 
-	private void viewOptionMenu(String optionMenuSelection, ArrayList<Food> storedFood, List<Double> statsTracker) {
+	private void viewOptionMenu(String optionMenuSelection, ArrayList<Food> storedFood, List<Double> statsTracker, FoodCSV database) {
 		try (Scanner reader = new Scanner(System.in)) {
 			while (!optionMenuSelection.equalsIgnoreCase("quit") && !optionMenuSelection.equals("4")) {
 
 				System.out.println("\nWelcome to Calorie Counter! Please enter a number from the options below:"
 						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Quit ");
 
-				optionMenuSelection = chooseFromOptions(storedFood, statsTracker, reader);
+				optionMenuSelection = chooseFromOptions(storedFood, statsTracker, reader, database);
 			}
 		}
 		System.out.println("Tracker ended.");
 	}
 
-	private String chooseFromOptions(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
+	private String chooseFromOptions(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader, FoodCSV database) {
 		String optionMenuSelection;
 		String optionMenuSelection2;
 		optionMenuSelection = reader.nextLine();
@@ -62,7 +65,7 @@ public class Prompt {
 
 		case "3":
 
-			createMeal(storedFood, statsTracker, reader);
+			createMeal(storedFood, statsTracker, reader, database);
 
 			break;
 		}
@@ -89,7 +92,7 @@ public class Prompt {
 		}
 	}
 
-	private void createMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
+	private void createMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader, FoodCSV database) {
 		boolean doneEnteringFood = false;
 
 		Meal trackedMeal = new Meal();
@@ -98,13 +101,13 @@ public class Prompt {
 		String mealName = reader.nextLine();
 
 		trackedMeal.setName(mealName);
-		enterFoodForMeal(storedFood, statsTracker, reader, doneEnteringFood, trackedMeal);
+		enterFoodForMeal(storedFood, statsTracker, reader, doneEnteringFood, trackedMeal, database);
 
 		System.out.println("Meal complete");
 	}
 
 	private void enterFoodForMeal(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader,
-			boolean doneEnteringFood, Meal trackedMeal) {
+			boolean doneEnteringFood, Meal trackedMeal, FoodCSV database) {
 
 		while (doneEnteringFood != true) {
 
