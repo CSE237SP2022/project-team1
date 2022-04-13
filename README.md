@@ -27,3 +27,4 @@ Future Implementations
 Run Instructions
   1. In a terminal window, clone the repository using the git clone command
   2. To execute, enter command './run.sh'
+  3. To check for .csv files, search for 'dailyFoodStatistics.csv' and 'database.csv' in search bar
