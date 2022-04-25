@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,6 @@ public class LargeDatabaseTests {
 	
 	@BeforeEach
 	void setup() {
-		
 		largeDatabase = new largeDatabase();
 		File largeData = largeDatabase.largeData;
 		
@@ -55,6 +55,32 @@ public class LargeDatabaseTests {
 		String result = largeDataArray[14164][4];
 				
 		assertTrue(result.equals(expected));
+	}
+	
+	@Test
+	void testMakeFoodObjectRow3() {
+		Food testFood = largeDatabase.makeFoodObject(2);
+		Double testFoodCalories = Double.valueOf(testFood.getCalories());
+		assertEquals(330, testFoodCalories, 0.05);
+	}
+	@Test
+	void testMakeFoodObjectRow1738() {
+		Food testFood = largeDatabase.makeFoodObject(1737);
+		Double testFoodCalories = Double.valueOf(testFood.getProtein());
+		assertEquals(0.9, testFoodCalories, 0.05);
+	}
+	
+	@Test
+	void testSearchBreadFry() {
+		ArrayList<Food> searchResults = largeDatabase.search("bread fry");
+		//largeDatabase.printSearchResult(searchResults);
+		assertEquals(searchResults.size(), 2);
+	}
+	@Test
+	void testSearchGrainWholeWheat() {
+		ArrayList<Food> searchResults = largeDatabase.search("grain whole wheat");
+		largeDatabase.printSearchResult(searchResults);
+		assertEquals(searchResults.size(), 7);
 	}
 	
 	
