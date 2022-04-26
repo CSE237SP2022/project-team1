@@ -10,9 +10,13 @@ import foodCSV.FoodCSV;
 import foodClass.Food;
 import mealClass.Meal;
 
-
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
 
 public class Prompt {
 	
@@ -219,8 +223,34 @@ public class Prompt {
 	}
 	
 	public static void writeToFile(ArrayList<String> foodStats) {
-		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics.csv", true)) {
-			dayFoodStats.append(foodStats + "\n");
+		LocalDate localDate = java.time.LocalDate.now();
+		String lastDate = localDate.toString();
+		
+		try (FileWriter lastDateEntered = new FileWriter("lastDateRan.txt", false)){
+			lastDateEntered.write(lastDate);			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) {
+			try {
+				File date = new File("lastDateRan.txt");
+				Scanner dateReader = new Scanner(date);
+				while (dateReader.hasNextLine()) {
+					String compareDate = dateReader.nextLine();
+					if (compareDate.equals(lastDate)) {
+						dayFoodStats.append(foodStats + "\n");
+					}
+					else {
+						dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
+					}
+				}
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		catch (IOException e) {
 			e.printStackTrace();
