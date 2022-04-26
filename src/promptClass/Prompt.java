@@ -8,6 +8,7 @@ import java.util.Scanner;
 import dayStatistics.dayStatistics;
 import foodCSV.FoodCSV;
 import foodClass.Food;
+import largeDatabase.largeDatabase;
 import mealClass.Meal;
 
 
@@ -23,9 +24,13 @@ public class Prompt {
 		String optionMenuSelection2 = "";
 		ArrayList<Food> storedFood = new ArrayList<>();
 		List<Double> statsTracker = new ArrayList<>();
+		
 		FoodCSV database = new FoodCSV();
 		String fileName = "database(1).csv";
 		database.generateFoodCSV(fileName);
+		
+		// need to add a new case to allow user to search in the large database
+		largeDatabase largeData = new largeDatabase(); 
 		
 
 		viewOptionMenu(optionMenuSelection, storedFood, statsTracker, database);
