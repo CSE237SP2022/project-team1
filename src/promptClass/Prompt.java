@@ -31,7 +31,7 @@ public class Prompt {
 		
 		FoodCSV database = new FoodCSV();
 		String fileName = "database(1).csv";
-		database.generateFoodCSV(fileName);
+		//database.generateFoodCSV(fileName);
 		
 		// need to add a new case to allow user to search in the large database
 		largeDatabase largeData = new largeDatabase(); 
