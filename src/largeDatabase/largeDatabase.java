@@ -20,7 +20,9 @@ public class largeDatabase {
 		String fileName = "large_database.csv";
 		
 		// may need to change path when this is part of prompt class
-		this.largeData = new File(curDir + "/src/counterClass/" + fileName);
+		//this.largeData = new File(curDir + "/src/counterClass/" + fileName);
+		this.largeData = new File(curDir + fileName);
+
 		this.largeDataArray = csvTo2dArray(largeData);
 	}
 
