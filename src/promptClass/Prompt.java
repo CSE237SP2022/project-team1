@@ -245,8 +245,7 @@ public class Prompt {
 					else {
 						dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
 					}
-				}
-				
+				}	
 			}
 			catch (IOException e) {
 				e.printStackTrace();
