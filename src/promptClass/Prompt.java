@@ -34,7 +34,7 @@ public class Prompt {
 		database.generateFoodCSV(fileName);
 		
 		// need to add a new case to allow user to search in the large database
-		largeDatabase largeData = new largeDatabase(); 
+		//largeDatabase largeData = new largeDatabase(); 
 		
 
 		viewOptionMenu(optionMenuSelection, storedFood, statsTracker, database);
