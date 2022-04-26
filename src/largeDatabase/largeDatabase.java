@@ -20,7 +20,8 @@ public class largeDatabase {
 		String fileName = "large_database.csv";
 		
 		// may need to change path when this is part of prompt class
-		this.largeData = new File(curDir + "/src/counterClass/bob/" + fileName);
+		this.largeData = new File(curDir + "/src/counterClass/" + fileName);
+		System.out.println("path: " + curDir + "/src/counterClass/bob/" + fileName);
 		
 		//this.largeData = new File(curDir + "/" + fileName);
 		
