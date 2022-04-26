@@ -16,6 +16,8 @@ public class largeDatabase {
 	private static final int COLS = 5;
 	
 	public largeDatabase() {
+		System.out.println("1path1: " + "/src/counterClass/bob/");
+		
 		String curDir = System.getProperty("user.dir");
 		String fileName = "large_database.csv";
 		
