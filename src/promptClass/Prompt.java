@@ -250,7 +250,6 @@ public class Prompt {
 			catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
 		catch (IOException e) {
 			e.printStackTrace();
