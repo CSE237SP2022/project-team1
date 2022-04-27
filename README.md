@@ -10,6 +10,7 @@ User Stories
   carbs, fat, and protein for a session
 - Users can view a .csv file with the food data of every food item entered across multiple sessions, called 'dailyFoodStatistics.csv'
 - Users can view a .csv file of every food item they have entered in a given session in the file called 'database.csv' (in the counterClass folder).  
+- A user can search a database of over 14,000 foods with nutritional facts compiled by myfooddata.com -- https://tools.myfooddata.com/nutrition-facts-database-spreadsheet.php -- the results appear in the form "food name | calories | carbs | fat | protein"
   
 Current Issues
 - Counter currently tracks total cumulative calories, but does not reset yet (like reset after a day)
@@ -22,7 +23,6 @@ Future Implementations
   will not have to repeat/enter anything other than its name
 - Further condense code by placing more of it in separate methods
 - Store food information based on the current day and reset food statistics after the day
-- Add more common foods to database.csv and make it a file that comes in the repo so all calorie tracker users have access to the large database
   
 Run Instructions
   1. In a terminal window, clone the repository using the git clone command

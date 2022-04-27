@@ -23,9 +23,11 @@ class PromptTests {
 	private Scanner reader = new Scanner(System.in);
 	private ArrayList<String> foodStats = new ArrayList<>();
 	
+	private Prompt prompt;
+	
 	@BeforeEach
 	void setup() {
-		Prompt p = new Prompt();
+		prompt = new Prompt();
 	}
 	
 	@Test
@@ -33,13 +35,13 @@ class PromptTests {
 		totalCalories.add(22.0);
 		totalCalories.add(26.1);
 		totalCalories.add(10.0);
-		double sumOfAllCalories = Prompt.sum(totalCalories);
+		double sumOfAllCalories = prompt.sum(totalCalories);
 		assertEquals(58.10, sumOfAllCalories, 0.05);
 	}
 	
 	@Test
 	void testSumZero() {
-		double sumOfAllCalories = Prompt.sum(totalCalories);
+		double sumOfAllCalories = prompt.sum(totalCalories);
 		assertEquals(0.00, sumOfAllCalories, 0.05);
 	}	
 	
