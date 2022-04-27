@@ -34,7 +34,7 @@ class PromptTests {
 	
 	@Test
 	void testSumZero() {
-		double sumOfAllCalories = Prompt.sum(totalCalories);
+		double sumOfAllCalories = p.sum(totalCalories);
 		assertEquals(0.00, sumOfAllCalories, 0.05);
 	}
 	

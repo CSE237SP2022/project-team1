@@ -24,7 +24,6 @@ public class Prompt {
 	public void run() {
 
 		String optionMenuSelection = "";
-		String optionMenuSelection2 = "";
 		FoodCSV database = new FoodCSV();
 		String fileName = "database(1).csv";
 		database.generateFoodCSV(fileName);
