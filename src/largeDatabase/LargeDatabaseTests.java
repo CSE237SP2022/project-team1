@@ -79,7 +79,7 @@ public class LargeDatabaseTests {
 	@Test
 	void testSearchGrainWholeWheat() {
 		ArrayList<Food> searchResults = largeDatabase.search("grain whole wheat");
-		largeDatabase.printSearchResult(searchResults);
+		//largeDatabase.printSearchResult(searchResults);
 		assertEquals(searchResults.size(), 7);
 	}
 	

@@ -33,25 +33,26 @@ public class Prompt {
 		String fileName = "database(1).csv";
 		database.generateFoodCSV(fileName);
 		
+		largeDatabase largeData = new largeDatabase();
 
-		viewOptionMenu(optionMenuSelection, storedFood, statsTracker, database);
+		viewOptionMenu(optionMenuSelection, storedFood, statsTracker, database, largeData);
 
 	}
 
-	private void viewOptionMenu(String optionMenuSelection, ArrayList<Food> storedFood, List<Double> statsTracker, FoodCSV database) {
+	private void viewOptionMenu(String optionMenuSelection, ArrayList<Food> storedFood, List<Double> statsTracker, FoodCSV database, largeDatabase largeData) {
 		try (Scanner reader = new Scanner(System.in)) {
-			while (!optionMenuSelection.equalsIgnoreCase("quit") && !optionMenuSelection.equals("4")) {
+			while (!optionMenuSelection.equalsIgnoreCase("quit") && !optionMenuSelection.equals("5")) {
 
 				System.out.println("\nWelcome to Calorie Counter! Please enter a number from the options below:"
-						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Quit ");
+						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Search in large database\n5. Quit ");
 
-				optionMenuSelection = chooseFromOptions(storedFood, statsTracker, reader, database);
+				optionMenuSelection = chooseFromOptions(storedFood, statsTracker, reader, database, largeData);
 			}
 		}
 		System.out.println("Tracker ended.");
 	}
 
-	private String chooseFromOptions(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader, FoodCSV database) {
+	private String chooseFromOptions(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader, FoodCSV database, largeDatabase largeData) {
 		String optionMenuSelection;
 		String optionMenuSelection2;
 		optionMenuSelection = reader.nextLine();
@@ -74,8 +75,25 @@ public class Prompt {
 			createMeal(storedFood, statsTracker, reader, database);
 
 			break;
+			
+		case "4":
+			
+			searchLargeData(largeData, reader);
+			
+			break;
 		}
 		return optionMenuSelection;
+	}
+	
+	private void searchLargeData(largeDatabase largeData, Scanner reader) {
+		String searchInput;
+		System.out.print("Enter keywords separated by a space: ");
+		
+		searchInput = reader.nextLine();
+		
+		ArrayList<Food> searchResults = largeData.search(searchInput);
+		largeData.printSearchResult(searchResults);
+		
 	}
 
 	private void statisticsView(ArrayList<Food> storedFood, List<Double> statsTracker, Scanner reader) {
