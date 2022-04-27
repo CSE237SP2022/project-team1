@@ -226,30 +226,35 @@ public class Prompt {
 		LocalDate localDate = java.time.LocalDate.now();
 		String lastDate = localDate.toString();
 		
-		try (FileWriter lastDateEntered = new FileWriter("lastDateRan.txt", false)){
-			lastDateEntered.write(lastDate);			
+		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) 
+		{	
+			File date = new File("lastDateRan.txt");
+			
+			// if the file exists, check last date ran ... else user's first run of the program
+			String compareDate = "";
+			if (date.isFile())
+			{
+				Scanner dateReader = new Scanner(date); // will not throw because we check isFile
+				if (dateReader.hasNextLine()) {
+					compareDate = dateReader.nextLine();
+				}
+				dateReader.close();
+			}
+				
+			if (compareDate.equals(lastDate)) {
+				dayFoodStats.append(foodStats + "\n");
+			}
+			else {
+				dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
+			}
+				
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) {
-			try {
-				File date = new File("lastDateRan.txt");
-				Scanner dateReader = new Scanner(date);
-				while (dateReader.hasNextLine()) {
-					String compareDate = dateReader.nextLine();
-					if (compareDate.equals(lastDate)) {
-						dayFoodStats.append(foodStats + "\n");
-					}
-					else {
-						dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
-					}
-				}	
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+		try (FileWriter lastDateEntered = new FileWriter("lastDateRan.txt", false)){
+			lastDateEntered.write(lastDate);			
 		}
 		catch (IOException e) {
 			e.printStackTrace();

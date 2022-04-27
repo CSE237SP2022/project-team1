@@ -26,12 +26,6 @@ class PromptTests {
 	@BeforeEach
 	void setup() {
 		Prompt p = new Prompt();
-		try (FileWriter foodStatsFile = new FileWriter("dailyFoodStats2.csv", true)) {
-			foodStatsFile.append("apple");
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		} 
 	}
 	
 	@Test
