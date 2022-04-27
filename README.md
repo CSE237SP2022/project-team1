@@ -8,7 +8,8 @@ User Stories
 - Users who wish to have a working record of their food intake can track each food they eat
 - Users who wish to view total stats for a particular day can see their cumulative calories,
   carbs, fat, and protein for a session
-- Users can view a .csv file with the food data of every food item entered across multiple sessions, called 'dailyFoodStatistics2.csv', now updated so that it tracks the food data intake per day, with the daily food data intake easily viewable on the file
+- Users can view a .csv file with the food data of every food item entered across multiple sessions, called 'dailyFoodStatistics2.csv'
+- Users can also now view their food data per day via the 'dailyFoodStatistics2.csv' file, as it now tracks the food data intake per day, with the daily food data intake easily viewable on the file
 - Users can view a .csv file of every food item they have entered in a given session in the file called 'database.csv' (in the counterClass folder).  
 - Users can search a database of over 14,000 foods with nutritional facts compiled by myfooddata.com -- https://tools.myfooddata.com/nutrition-facts-database-spreadsheet.php -- the results appear in the form "food name | calories | carbs | fat | protein"
   
