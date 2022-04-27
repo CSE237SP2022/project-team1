@@ -21,10 +21,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Prompt {
 	
-	static Scanner reader = new Scanner(System.in);
-	static ArrayList<Food> storedFood = new ArrayList<>();
-	static List<Double> statsTracker = new ArrayList<>();
+	private Scanner reader = new Scanner(System.in);
+	private ArrayList<Food> storedFood = new ArrayList<>();
+	private List<Double> statsTracker = new ArrayList<>();
 	
+	public Prompt() {
+		reader = new Scanner(System.in);
+		storedFood = new ArrayList<>();
+		statsTracker = new ArrayList<>();
+	}
 	
 	public void run() {
 
@@ -32,26 +37,27 @@ public class Prompt {
 		FoodCSV database = new FoodCSV();
 		String fileName = "database(1).csv";
 		database.generateFoodCSV(fileName);
-		
+		largeDatabase largeData = new largeDatabase();
 
-		viewOptionMenu(optionMenuSelection, database);
+		viewOptionMenu(optionMenuSelection, database, largeData);
 
 	}
 
-	private void viewOptionMenu(String optionMenuSelection, FoodCSV database) {
+	private void viewOptionMenu(String optionMenuSelection, FoodCSV database, largeDatabase largeData) {
 		try (Scanner reader = new Scanner(System.in)) {
-			while (!optionMenuSelection.equalsIgnoreCase("quit") && !optionMenuSelection.equals("4")) {
+			while (!optionMenuSelection.equalsIgnoreCase("quit") && !optionMenuSelection.equals("5")) {
 
 				System.out.println("\nWelcome to Calorie Counter! Please enter a number from the options below:"
-						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Quit ");
+						+ "\n1. Enter a food\n2. Check food stats\n3. Create a meal\n4. Search in large "
+						+ "database\n5. Quit ");
 
-				optionMenuSelection = chooseFromOptions(database);
+				optionMenuSelection = chooseFromOptions(database, largeData);
 			}
 		}
 		System.out.println("Tracker ended.");
 	}
 
-	private String chooseFromOptions(FoodCSV database) {
+	private String chooseFromOptions(FoodCSV database, largeDatabase largeData) {
 		String optionMenuSelection;
 		optionMenuSelection = reader.nextLine();
 
@@ -72,6 +78,12 @@ public class Prompt {
 
 			createMeal(database);
 
+			break;
+			
+		case "4":
+			
+			searchLargeData(largeData, reader);
+			
 			break;
 		}
 		return optionMenuSelection;
@@ -114,6 +126,16 @@ public class Prompt {
 		enterFoodForMeal(doneEnteringFood, trackedMeal, database);
 
 		System.out.println("Meal complete");
+	}
+	
+	private void searchLargeData(largeDatabase largeData, Scanner reader) {
+		String searchInput;
+		System.out.print("Enter keywords separated by a space: ");
+		
+		searchInput = reader.nextLine();
+		
+		ArrayList<Food> searchResults = largeData.search(searchInput);
+		largeData.printSearchResult(searchResults);
 	}
 
 	private void enterFoodForMeal(boolean doneEnteringFood, Meal trackedMeal, FoodCSV database) {
