@@ -21,10 +21,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Prompt {
 	
-	static Scanner reader = new Scanner(System.in);
-	static ArrayList<Food> storedFood = new ArrayList<>();
-	static List<Double> statsTracker = new ArrayList<>();
+	private Scanner reader = new Scanner(System.in);
+	private ArrayList<Food> storedFood = new ArrayList<>();
+	private List<Double> statsTracker = new ArrayList<>();
 	
+	public Prompt() {
+		reader = new Scanner(System.in);
+		storedFood = new ArrayList<>();
+		statsTracker = new ArrayList<>();
+	}
 	
 	public void run() {
 
