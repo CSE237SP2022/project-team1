@@ -9,8 +9,8 @@ import foodClass.Food;
 
 public class largeDatabase {
 	
-	File largeData;
-	String[][] largeDataArray;
+	File largeData; File largeDataTester;
+	String[][] largeDataArray; String[][] largeDataTesterArray;
 	
 	private static final int ROWS = 14165;
 	private static final int COLS = 5;
@@ -19,11 +19,11 @@ public class largeDatabase {
 		String curDir = System.getProperty("user.dir");
 		String fileName = "large_database.csv";
 		
-		// may need to change path when this is part of prompt class
-		//this.largeData = new File(curDir + "/src/counterClass/" + fileName);
 		this.largeData = new File(curDir + "/" + fileName);
+		this.largeDataTester = new File(curDir + "/src/counterClass/" + fileName);
 		
 		this.largeDataArray = csvTo2dArray(largeData);
+		this.largeDataTesterArray = csvTo2dArray(largeDataTester);
 	}
 
 	
@@ -56,7 +56,7 @@ public class largeDatabase {
 		} 
 		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return arr;
 	}
@@ -67,29 +67,34 @@ public class largeDatabase {
 				
 		String[] inputKeywords = input.split(" ");
 		
-		for(int j=0; j<largeDataArray.length; j++) {
-			String foodInDatabase = largeDataArray[j][0].toLowerCase();
-			int containsCounter = 1;
-			boolean contains = false;
-			int threshold = inputKeywords.length+1;			
-		
-			for(int i=0; i<inputKeywords.length; i++) {
-				
-				String inputKeyword = inputKeywords[i].toLowerCase();
-
-				if(foodInDatabase.contains(inputKeyword)) {
-					containsCounter++;
-				}
-				if(containsCounter == threshold) {
-					contains = true;
-				}
-				if(contains) {
-					Food foodToAdd = makeFoodObject(j);
-					result.add(foodToAdd);
-					containsCounter = 1;
-					contains = false;
+		try {
+			for(int j=0; j<largeDataArray.length; j++) {
+				String foodInDatabase = largeDataArray[j][0].toLowerCase();
+				int containsCounter = 1;
+				boolean contains = false;
+				int threshold = inputKeywords.length+1;			
+			
+				for(int i=0; i<inputKeywords.length; i++) {
+					
+					String inputKeyword = inputKeywords[i].toLowerCase();
+	
+					if(foodInDatabase.contains(inputKeyword)) {
+						containsCounter++;
+					}
+					if(containsCounter == threshold) {
+						contains = true;
+					}
+					if(contains) {
+						Food foodToAdd = makeFoodObject(j);
+						result.add(foodToAdd);
+						containsCounter = 1;
+						contains = false;
+					}
 				}
 			}
+		}
+		catch (NullPointerException e) {
+			System.out.println("Run program in command line with \'./run.sh\'");
 		}
 		return result;
 	}	
@@ -124,6 +129,59 @@ public class largeDatabase {
 		double carbs = Double.valueOf(this.largeDataArray[row][2]);
 		double fat = Double.valueOf(this.largeDataArray[row][3]);
 		double protein = Double.valueOf(this.largeDataArray[row][4]);
+		
+		Food food = new Food(name, calories, carbs, fat, protein);
+		return food;
+	}
+	
+	
+	////////////////////////////////////////////////////////////
+//	Methods to help with unit tests since the test runs 
+//	from a different working directory than the main 
+//	method. The only difference is that the tests access 
+//	largeDataTester and largeDataTesterArray since those
+//	are accessed by a different relative path from
+//	the current working directory
+	
+	
+	public ArrayList<Food> searchTester(String input) {
+		ArrayList<Food> result = new ArrayList<>();
+				
+		String[] inputKeywords = input.split(" ");
+		
+		for(int j=0; j<largeDataTesterArray.length; j++) {
+			String foodInDatabase = largeDataTesterArray[j][0].toLowerCase();
+			int containsCounter = 1;
+			boolean contains = false;
+			int threshold = inputKeywords.length+1;			
+		
+			for(int i=0; i<inputKeywords.length; i++) {
+				
+				String inputKeyword = inputKeywords[i].toLowerCase();
+
+				if(foodInDatabase.contains(inputKeyword)) {
+					containsCounter++;
+				}
+				if(containsCounter == threshold) {
+					contains = true;
+				}
+				if(contains) {
+					Food foodToAdd = makeFoodObjectTester(j);
+					result.add(foodToAdd);
+					containsCounter = 1;
+					contains = false;
+				}
+			}
+		}
+		return result;
+	}	
+	public Food makeFoodObjectTester(int row) {
+		//row--;
+		String name = this.largeDataTesterArray[row][0];
+		double calories = Double.valueOf(this.largeDataTesterArray[row][1]);
+		double carbs = Double.valueOf(this.largeDataTesterArray[row][2]);
+		double fat = Double.valueOf(this.largeDataTesterArray[row][3]);
+		double protein = Double.valueOf(this.largeDataTesterArray[row][4]);
 		
 		Food food = new Food(name, calories, carbs, fat, protein);
 		return food;
