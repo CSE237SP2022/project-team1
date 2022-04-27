@@ -8,6 +8,7 @@ import java.util.Scanner;
 import dayStatistics.dayStatistics;
 import foodCSV.FoodCSV;
 import foodClass.Food;
+import largeDatabase.largeDatabase;
 import mealClass.Meal;
 
 import java.io.File;
@@ -300,6 +301,30 @@ public class Prompt {
 		
 		try (FileWriter lastDateEntered = new FileWriter("lastDateRan.txt", false)){
 			lastDateEntered.write(lastDate);			
+
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) {
+			try {
+				File date = new File("lastDateRan.txt");
+				Scanner dateReader = new Scanner(date);
+				while (dateReader.hasNextLine()) {
+					String compareDate = dateReader.nextLine();
+					if (compareDate.equals(lastDate)) {
+						dayFoodStats.append(foodStats + "\n");
+					}
+					else {
+						dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
+					}
+				}	
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 		catch (IOException e) {
 			e.printStackTrace();
