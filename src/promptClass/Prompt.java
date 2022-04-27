@@ -295,38 +295,63 @@ public class Prompt {
 	}
 	
 	public static void writeToFile(ArrayList<String> foodStats) {
-		LocalDate localDate = java.time.LocalDate.now();
-		String lastDate = localDate.toString();
-		
-		try (FileWriter lastDateEntered = new FileWriter("lastDateRan.txt", false)){
-			lastDateEntered.write(lastDate);			
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) {
-			try {
-				File date = new File("lastDateRan.txt");
-				Scanner dateReader = new Scanner(date);
-				while (dateReader.hasNextLine()) {
-					String compareDate = dateReader.nextLine();
-					if (compareDate.equals(lastDate)) {
-						dayFoodStats.append(foodStats + "\n");
-					}
-					else {
-						dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
-					}
-				}	
+			LocalDate localDate = java.time.LocalDate.now();
+			String lastDate = localDate.toString();
+			
+			try (FileWriter lastDateEntered = new FileWriter("lastDateRan.txt", false)){
+				lastDateEntered.write(lastDate);			
+	
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) {
+				try {
+					File date = new File("lastDateRan.txt");
+					Scanner dateReader = new Scanner(date);
+					while (dateReader.hasNextLine()) {
+						String compareDate = dateReader.nextLine();
+						if (compareDate.equals(lastDate)) {
+							dayFoodStats.append(foodStats + "\n");
+						}
+						else {
+							dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
+						}
+					}	
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try (FileWriter dayFoodStats = new FileWriter("dailyFoodStatistics2.csv", true)) {
+				try {
+					File date = new File("lastDateRan.txt");
+					Scanner dateReader = new Scanner(date);
+					while (dateReader.hasNextLine()) {
+						String compareDate = dateReader.nextLine();
+						if (compareDate.equals(lastDate)) {
+							dayFoodStats.append(foodStats + "\n");
+						}
+						else {
+							dayFoodStats.append(lastDate + "\r" + foodStats + "\n");
+						}
+					}	
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	
 	public boolean checkDuplicate(String name) {
