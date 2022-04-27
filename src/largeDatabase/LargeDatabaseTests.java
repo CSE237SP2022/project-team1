@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import foodCSV.FoodCSV;
 import foodClass.Food;
-import largeDatabase.largeDatabase;
 
 public class LargeDatabaseTests {
 
@@ -21,8 +19,8 @@ public class LargeDatabaseTests {
 	@BeforeEach
 	void setup() {
 		largeDatabase = new largeDatabase();
-		File largeData = largeDatabase.largeDataTester;
 		
+		File largeData = largeDatabase.largeDataTester;
 		largeDataArray = largeDatabase.csvTo2dArray(largeData);
 		
 	}

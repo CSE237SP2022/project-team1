@@ -33,7 +33,7 @@ public class largeDatabase {
 		try {
 			Scanner sc = new Scanner(file);
 			sc.useDelimiter(",");
-			for(int row = 0; row<ROWS; row++) {
+			for(int row = 0; row < ROWS; row++) {
 				for(int col = 0; col < COLS; col++) {
 					
 					if(sc.hasNext()) {
@@ -55,11 +55,13 @@ public class largeDatabase {
 			sc.close();
 		} 
 		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
 		return arr;
 	}
+	
+
+	
 	
 	
 	public ArrayList<Food> search(String input) {
@@ -123,7 +125,6 @@ public class largeDatabase {
 	}
 	
 	public Food makeFoodObject(int row) {
-		//row--;
 		String name = this.largeDataArray[row][0];
 		double calories = Double.valueOf(this.largeDataArray[row][1]);
 		double carbs = Double.valueOf(this.largeDataArray[row][2]);
