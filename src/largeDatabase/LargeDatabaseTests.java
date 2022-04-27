@@ -21,7 +21,7 @@ public class LargeDatabaseTests {
 	@BeforeEach
 	void setup() {
 		largeDatabase = new largeDatabase();
-		File largeData = largeDatabase.largeData;
+		File largeData = largeDatabase.largeDataTester;
 		
 		largeDataArray = largeDatabase.csvTo2dArray(largeData);
 		
@@ -59,27 +59,27 @@ public class LargeDatabaseTests {
 	
 	@Test
 	void testMakeFoodObjectRow3() {
-		Food testFood = largeDatabase.makeFoodObject(2);
+		Food testFood = largeDatabase.makeFoodObjectTester(2);
 		Double testFoodCalories = Double.valueOf(testFood.getCalories());
 		assertEquals(330, testFoodCalories, 0.05);
 	}
 	@Test
 	void testMakeFoodObjectRow1738() {
-		Food testFood = largeDatabase.makeFoodObject(1737);
+		Food testFood = largeDatabase.makeFoodObjectTester(1737);
 		Double testFoodCalories = Double.valueOf(testFood.getProtein());
 		assertEquals(0.9, testFoodCalories, 0.05);
 	}
 	
 	@Test
 	void testSearchBreadFry() {
-		ArrayList<Food> searchResults = largeDatabase.search("bread fry");
+		ArrayList<Food> searchResults = largeDatabase.searchTester("bread fry");
 		//largeDatabase.printSearchResult(searchResults);
 		assertEquals(searchResults.size(), 2);
 	}
 	@Test
 	void testSearchGrainWholeWheat() {
-		ArrayList<Food> searchResults = largeDatabase.search("grain whole wheat");
-		largeDatabase.printSearchResult(searchResults);
+		ArrayList<Food> searchResults = largeDatabase.searchTester("grain whole wheat");
+		//largeDatabase.printSearchResult(searchResults);
 		assertEquals(searchResults.size(), 7);
 	}
 	
